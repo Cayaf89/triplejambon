@@ -1,0 +1,38 @@
+to do
+	jeu en general
+
+
+en faire une classe que l'on peut appeler sur une page web avec un with et height en parametre
+
+	world:
+
+
+eau/ boire
+periode de nuit
+des petits animaux/bestioles juste a bouffer mais qui bougent
+
+
+
+	arbres:
+arbres qui peuvent mpurrir/ fruits qui peuvent donner des arbres
+
+autrezs aliments/ buisson
+
+fruits d'une couleur differente;
+
+
+
+	slimes:
+
+bebeavec un skin different
+
+vitesse/caractéristique qui change avec l'age
+
+
+
+
+
+le slim doré
+
+dodo
+
