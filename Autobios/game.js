@@ -1,5 +1,32 @@
+var push_slime = function() {
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+	ctx.slimes.push(new Slime(ctx));
+}
 
+var target_slime = function(id) {
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+	for(var i = 0; i < ctx.slimes.length; i++) {
+		if(ctx.slimes[i].id == id) {
+			ctx.slimes[i].set_target();
+			break;
+		}
+	}
+	document.getElementsByClassName("slime_" + id)[0].setAttribute("style", "background-color: red;");
+}
 
+var untarget_slime = function(id) {
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+	for(var i = 0; i < ctx.slimes.length; i++) {
+		if(ctx.slimes[i].id == id) {
+			ctx.slimes[i].unset_target();
+			break;
+		}
+	}
+	document.getElementsByClassName("slime_" + id)[0].setAttribute("style", "");
+}
 document.addEventListener('DOMContentLoaded', function() {
 
 	var updateTimeout;
@@ -10,8 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	var counter = document.getElementById("count");
 	var canvas = document.getElementById("canvas");
 	var ctx = canvas.getContext("2d");
-
-	
 	var slimNumber = 2;
 
 
@@ -21,6 +46,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		ctx.slimes.push(new Slime(ctx));
 	}
 
+	ctx.slimeTab = new SlimeTab(ctx);
+	ctx.slimes_tabs = document.getElementById("slimes_tabs");
 
 var slimy = ctx.slimes[0];
 var slimo = ctx.slimes[1];
@@ -34,7 +61,6 @@ var slimo = ctx.slimes[1];
 
 	ctx.arbres = [];
 
-
 	
 
 	for(var i =0;i<5;i++){
@@ -47,12 +73,14 @@ var slimo = ctx.slimes[1];
 
 	ctx.fruits = [];
 	ctx.animations = [];
+
 	// @return slim
 	ctx.getSlimById = function(idSlim){
 		var res = null;
 		for(var i = 0; i<this.slimes.length && res == null;i++){
 			if (this.slimes[i].id == idSlim){
 				res = this.slimes[i];
+				break;
 			}
 		}
 		return res;
@@ -70,7 +98,9 @@ var slimo = ctx.slimes[1];
 	var update = function(){
 		ctx.clearRect(0,0,ctx.canvas.width,ctx.canvas.height);
 		
-		count.innerHTML = ctx.slimes.length;
+		count.innerHTML = "<p>Slimes : " + ctx.slimes.length + "</p>" +
+						  "<p>Arbres : " + ctx.arbres.length + "</p>" +
+						  "<p>Fruits : " + ctx.fruits.length + "</p>";
 
 		
 
@@ -78,7 +108,7 @@ var slimo = ctx.slimes[1];
 		if((ctx.time% 100) == 0  &&ctx.fruits.length<10*ctx.arbres.length){
 			
 			for(var i = 0;i<ctx.arbres.length;i++){
-				if(random(10)< 6){ctx.arbres[i].makeFruit(ctx);}
+				if(random(10)< 3){ctx.arbres[i].makeFruit(ctx);}
 			}
 		}
 

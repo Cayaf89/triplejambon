@@ -53,7 +53,6 @@ Item.prototype = {
 	Constructor: Item,
 
 	draw: function(ctx){
-
 		if(this.slime!=null){
 				ctx.drawImage(this.img,this.slime.x+this.x,this.slime.y+this.y);
 			}else{
@@ -78,7 +77,7 @@ Item.prototype = {
 	},
 
 	kill: function(){
-		delete this.slime;
+		delete this;
 	},
 
 	equals: function(item){
